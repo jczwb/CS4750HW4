@@ -90,185 +90,346 @@ public class Node {
     //evaluate whether this is a "solution", should also set the heuristic of this node to a really large negative or positve number
     // based upon whether player one or player two is moving
     // obtained four in a row portion from http://www.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe.html, inferred the rest from this
-    public boolean isTerminal(boolean isMaxPlayer, int selectedRow, int selectedColumn){
+    public boolean isTerminal(){
         int count = 0;
-        char currentPlayer;
-        
-        //set which player is currently taking a turn
-        if(isMaxPlayer){
-            currentPlayer = 'x';
-        }
-        else{
-            currentPlayer = 'o';
-        }
+        char prevSpace = '-';
         
         //check for four in a row horizontally
-        for(int col = 0; col < 6; col++){
-            if (board[selectedRow][col] == currentPlayer){
-                count++;
-                if(count == 4){ //four in a row found
-                    return true;
+        for(int row = 0; row < 6; row++){
+            for(int col = 0; col < 6; col++){
+                if (board[row][col] == '-'){
+                    prevSpace = '-';
+                    count = 0;
+                }
+                else if (board[row][col] == 'x'){
+                    if (prevSpace == 'x'){
+                        count++;
+                    } else count = 0; //reset counter if changed
+                    prevSpace = 'x';
+                    if(count == 4){ //four in a row found
+                        this.heuristic = Double.NEGATIVE_INFINITY;
+                        return true;
+                    }
+                }
+                else if (board[row][col] == 'o'){
+                    if (prevSpace == 'o'){
+                        count++;
+                    } else count = 0; //reset counter if changed
+                    prevSpace = 'o';
+                    if(count == 4){ //four in a row found
+                        this.heuristic = Double.POSITIVE_INFINITY;
+                        return true;
+                    }
                 }
             }
-            else{
-                count = 0; //reset counter if tokens are not consecutive
-            }
-            
-        }
+        } 
+        //end horizontal chaeck
         
         //check for four in a row vertically
-        for(int row = 0; row < 6; row++){
-            if (board[row][selectedColumn] == currentPlayer){
-                count++;
+        for(int col = 0; col < 6; col++){
+            for(int row = 0; row < 6; row++){
+                if (board[row][col] == '-'){
+                    prevSpace = '-';
+                    count = 0;
+                }
+                else if (board[row][col] == 'x'){
+                    if (prevSpace == 'x'){
+                        count++;
+                    } else count = 0; //reset counter if changed
+                    prevSpace = 'x';
+                    if(count == 4){ //four in a row found
+                        this.heuristic = Double.NEGATIVE_INFINITY;
+                        return true;
+                    }
+                }
+                else if (board[row][col] == 'o'){
+                    if (prevSpace == 'o'){
+                        count++;
+                    } else count = 0; //reset counter if changed
+                    prevSpace = 'o';
+                    if(count == 4){ //four in a row found
+                        this.heuristic = Double.POSITIVE_INFINITY;
+                        return true;
+                    }
+                }
+            }
+        } 
+        //end vertical check
+        
+        //check for four in a row diagonally using the following five for-loops
+         
+        for(int i = 0; i < 6; i++){ //check along diagonal line from 0,0 to 5,5
+            if (board[i][i] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][i] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
                 if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
-            else{
-                count = 0; //reset counter if tokens are not consecutive
+            else if (board[i][i] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 1; i < 6; i++){ //check along diagonal line from 1,0 to 5,4
+            if (board[i][i-1] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][i-1] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
+                }
+            }
+            else if (board[i][i-1] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 2; i < 6; i++){ //check along diagonal line from 2,0 to 5,3
+            if (board[i][i-2] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][i-2] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
+                }
+            }
+            else if (board[i][i-2] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 0; i < 5; i++){ //check along diagonal line from 0,1 to 4,5
+            if (board[i][i+1] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][i+1] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
+                }
+            }
+            else if (board[i][i+1] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 0; i < 4; i++){ //check along diagonal line from 0,2 to 3,5
+            if (board[i][i+2] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][i+2] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
+                }
+            }
+            else if (board[i][i+2] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
             }
         }
         
-        //check for four in a row diagonally
-        switch(selectedRow - selectedColumn){
-            case 0: //place along diagonal line from 0,0 to 5,5
-                for(int i = 0; i < 6; i++){
-                    if (board[i][i] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
-                }
-                break;
-            case 1: //place along diagonal line from 1,0 to 5,4
-                for(int i = 1; i < 6; i++){
-                    if (board[i][i-1] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
-                }
-                break;
-            case 2: //place along diagonal line from 2,0 to 5,3
-                for(int i = 2; i < 6; i++){
-                    if (board[i][i-2] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
-                }
-                break;
-            case -1: //place along diagonal line from 0,1 to 4,5
-                for(int i = 0; i < 5; i++){
-                    if (board[i][i+1] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
-                }
-                break;
-            case -2: //place along diagonal line from 0,2 to 3,5
-                for(int i = 0; i < 4; i++){
-                    if (board[i][i+2] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
-                }
-                break;
-            default: //place in corner area that does not have 4 diagonal spaces to cover
-                break;
-        }
+        //end diagonal check
+                        
+        //check for four in a row opposite-diagonally using the following five for-loops
         
-        //check for four in a row opposite-diagonally
-        switch(selectedColumn - (5-selectedRow)){ //adjust for declining order in row
-            case 0: //place along opposite-diagonal line from 0,5 to 5,0
-                for(int i = 0; i < 6; i++){
-                    if (board[i][5-i] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
+        for(int i = 0; i < 6; i++){ //check along opposite-diagonal line from 0,5 to 5,0
+            if (board[i][5-i] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][5-i] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
                 }
-                break;
-            case 1: //place along opposite-diagonal line from 1,5 to 5,1
-                for(int i = 1; i < 6; i++){
-                    if (board[i][6-i] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
+            }
+            else if (board[i][5-i] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
                 }
-                break;
-            case 2: //place along diagonal line from 2,5 to 5,2
-                for(int i = 2; i < 6; i++){
-                    if (board[i][7-i] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
+            }
+        }
+
+        for(int i = 1; i < 6; i++){ //check along opposite-diagonal line from 1,5 to 5,1
+            if (board[i][6-i] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][6-i] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
                 }
-                break;
-            case -1: //place along diagonal line from 0,4 to 4,0
-                for(int i = 0; i < 5; i++){
-                    if (board[i][4-i] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
+            }
+            else if (board[i][6-i] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
                 }
-                break;
-            case -2: //place along diagonal line from 0,3 to 3,0
-                for(int i = 0; i < 4; i++){
-                    if (board[i][3-i] == currentPlayer){
-                        count++;
-                        if(count == 4){
-                            return true;
-                        }
-                    }
-                    else{
-                        count = 0;
-                    }
+            }
+        }
+
+        for(int i = 2; i < 6; i++){ //check along opposite-diagonal line from 2,5 to 5,2
+            if (board[i][7-i] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][7-i] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
                 }
-                break;
-            default: //place in corner area that does not have 4 diagonal spaces to cover
-                break;
+            }
+            else if (board[i][7-i] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 0; i < 5; i++){ //check along opposite-diagonal line from 0,4 to 4,0
+            if (board[i][4-i] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][4-i] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
+                }
+            }
+            else if (board[i][4-i] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 0; i < 4; i++){ //check along opposite-diagonal line from 0,3 to 3,0
+            if (board[i][3-i] == '-'){
+                prevSpace = '-';
+                count = 0;
+            }
+            else if (board[i][3-i] == 'x'){
+                if (prevSpace == 'x'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'x';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    return true;
+                }
+            }
+            else if (board[i][3-i] == 'o'){
+                if (prevSpace == 'o'){
+                    count++;
+                } else count = 0; //reset counter if changed
+                prevSpace = 'o';
+                if(count == 4){ //four in a row found
+                    this.heuristic = Double.POSITIVE_INFINITY;
+                    return true;
+                }
+            }
         }
         
         return false;
