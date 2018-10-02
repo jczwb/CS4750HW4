@@ -7,7 +7,7 @@ package cs4750hw4;
 
 /**
  *
- * @author Joey Crowe
+ * @author Joey Crowe, Danny Jakle
  */
 public class Node {
     private char[][] board;
@@ -89,9 +89,192 @@ public class Node {
     
     //evaluate whether this is a "solution", should also set the heuristic of this node to a really large negative or positve number
     // based upon whether player one or player two is moving
-    public boolean isTerminal(){
+    // obtained four in a row portion from http://www.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe.html, inferred the rest from this
+    public boolean isTerminal(boolean isMaxPlayer, int selectedRow, int selectedColumn){
+        int count = 0;
+        char currentPlayer;
+        
+        //set which player is currently taking a turn
+        if(isMaxPlayer){
+            currentPlayer = 'x';
+        }
+        else{
+            currentPlayer = 'o';
+        }
+        
+        //check for four in a row horizontally
+        for(int col = 0; col < 6; col++){
+            if (board[selectedRow][col] == currentPlayer){
+                count++;
+                if(count == 4){ //four in a row found
+                    return true;
+                }
+            }
+            else{
+                count = 0; //reset counter if tokens are not consecutive
+            }
+            
+        }
+        
+        //check for four in a row vertically
+        for(int row = 0; row < 6; row++){
+            if (board[row][selectedColumn] == currentPlayer){
+                count++;
+                if(count == 4){ //four in a row found
+                    return true;
+                }
+            }
+            else{
+                count = 0; //reset counter if tokens are not consecutive
+            }
+        }
+        
+        //check for four in a row diagonally
+        switch(selectedRow - selectedColumn){
+            case 0: //place along diagonal line from 0,0 to 5,5
+                for(int i = 0; i < 6; i++){
+                    if (board[i][i] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case 1: //place along diagonal line from 1,0 to 5,4
+                for(int i = 1; i < 6; i++){
+                    if (board[i][i-1] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case 2: //place along diagonal line from 2,0 to 5,3
+                for(int i = 2; i < 6; i++){
+                    if (board[i][i-2] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case -1: //place along diagonal line from 0,1 to 4,5
+                for(int i = 0; i < 5; i++){
+                    if (board[i][i+1] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case -2: //place along diagonal line from 0,2 to 3,5
+                for(int i = 0; i < 4; i++){
+                    if (board[i][i+2] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            default: //place in corner area that does not have 4 diagonal spaces to cover
+                break;
+        }
+        
+        //check for four in a row opposite-diagonally
+        switch(selectedColumn - (5-selectedRow)){ //adjust for declining order in row
+            case 0: //place along opposite-diagonal line from 0,5 to 5,0
+                for(int i = 0; i < 6; i++){
+                    if (board[i][5-i] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case 1: //place along opposite-diagonal line from 1,5 to 5,1
+                for(int i = 1; i < 6; i++){
+                    if (board[i][6-i] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case 2: //place along diagonal line from 2,5 to 5,2
+                for(int i = 2; i < 6; i++){
+                    if (board[i][7-i] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case -1: //place along diagonal line from 0,4 to 4,0
+                for(int i = 0; i < 5; i++){
+                    if (board[i][4-i] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            case -2: //place along diagonal line from 0,3 to 3,0
+                for(int i = 0; i < 4; i++){
+                    if (board[i][3-i] == currentPlayer){
+                        count++;
+                        if(count == 4){
+                            return true;
+                        }
+                    }
+                    else{
+                        count = 0;
+                    }
+                }
+                break;
+            default: //place in corner area that does not have 4 diagonal spaces to cover
+                break;
+        }
+        
         return false;
     }
+    
+    
     //implement heuristic function, looks like one of the most complicated pieces of code, consider examining comment 
     //above by heuristic for possible implementation for tiebreakers
     public void setHeuristic(){
