@@ -91,7 +91,7 @@ public class Node {
     // based upon whether player one or player two is moving
     // obtained four in a row portion from http://www.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe.html, inferred the rest from this
     public boolean isTerminal(){
-        int count = 0;
+        int count = 1;
         char prevSpace = '-';
         
         //check for four in a row horizontally
@@ -99,12 +99,12 @@ public class Node {
             for(int col = 0; col < 6; col++){
                 if (board[row][col] == '-'){
                     prevSpace = '-';
-                    count = 0;
+                    count = 1;
                 }
                 else if (board[row][col] == 'x'){
                     if (prevSpace == 'x'){
                         count++;
-                    } else count = 0; //reset counter if changed
+                    } else count = 1; //reset counter if changed
                     prevSpace = 'x';
                     if(count == 4){ //four in a row found
                         this.heuristic = Double.NEGATIVE_INFINITY;
@@ -114,7 +114,7 @@ public class Node {
                 else if (board[row][col] == 'o'){
                     if (prevSpace == 'o'){
                         count++;
-                    } else count = 0; //reset counter if changed
+                    } else count = 1; //reset counter if changed
                     prevSpace = 'o';
                     if(count == 4){ //four in a row found
                         this.heuristic = Double.POSITIVE_INFINITY;
@@ -130,12 +130,12 @@ public class Node {
             for(int row = 0; row < 6; row++){
                 if (board[row][col] == '-'){
                     prevSpace = '-';
-                    count = 0;
+                    count = 1;
                 }
                 else if (board[row][col] == 'x'){
                     if (prevSpace == 'x'){
                         count++;
-                    } else count = 0; //reset counter if changed
+                    } else count = 1; //reset counter if changed
                     prevSpace = 'x';
                     if(count == 4){ //four in a row found
                         this.heuristic = Double.NEGATIVE_INFINITY;
@@ -145,7 +145,7 @@ public class Node {
                 else if (board[row][col] == 'o'){
                     if (prevSpace == 'o'){
                         count++;
-                    } else count = 0; //reset counter if changed
+                    } else count = 1; //reset counter if changed
                     prevSpace = 'o';
                     if(count == 4){ //four in a row found
                         this.heuristic = Double.POSITIVE_INFINITY;
@@ -161,12 +161,12 @@ public class Node {
         for(int i = 0; i < 6; i++){ //check along diagonal line from 0,0 to 5,5
             if (board[i][i] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][i] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -176,7 +176,7 @@ public class Node {
             else if (board[i][i] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -188,12 +188,12 @@ public class Node {
         for(int i = 1; i < 6; i++){ //check along diagonal line from 1,0 to 5,4
             if (board[i][i-1] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][i-1] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -203,7 +203,7 @@ public class Node {
             else if (board[i][i-1] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -215,12 +215,12 @@ public class Node {
         for(int i = 2; i < 6; i++){ //check along diagonal line from 2,0 to 5,3
             if (board[i][i-2] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][i-2] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -230,7 +230,7 @@ public class Node {
             else if (board[i][i-2] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -242,12 +242,12 @@ public class Node {
         for(int i = 0; i < 5; i++){ //check along diagonal line from 0,1 to 4,5
             if (board[i][i+1] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][i+1] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -257,7 +257,7 @@ public class Node {
             else if (board[i][i+1] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -269,12 +269,12 @@ public class Node {
         for(int i = 0; i < 4; i++){ //check along diagonal line from 0,2 to 3,5
             if (board[i][i+2] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][i+2] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -284,7 +284,7 @@ public class Node {
             else if (board[i][i+2] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -300,12 +300,12 @@ public class Node {
         for(int i = 0; i < 6; i++){ //check along opposite-diagonal line from 0,5 to 5,0
             if (board[i][5-i] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][5-i] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -315,7 +315,7 @@ public class Node {
             else if (board[i][5-i] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -327,12 +327,12 @@ public class Node {
         for(int i = 1; i < 6; i++){ //check along opposite-diagonal line from 1,5 to 5,1
             if (board[i][6-i] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][6-i] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -342,7 +342,7 @@ public class Node {
             else if (board[i][6-i] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -354,12 +354,12 @@ public class Node {
         for(int i = 2; i < 6; i++){ //check along opposite-diagonal line from 2,5 to 5,2
             if (board[i][7-i] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][7-i] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -369,7 +369,7 @@ public class Node {
             else if (board[i][7-i] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -381,12 +381,12 @@ public class Node {
         for(int i = 0; i < 5; i++){ //check along opposite-diagonal line from 0,4 to 4,0
             if (board[i][4-i] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][4-i] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -396,7 +396,7 @@ public class Node {
             else if (board[i][4-i] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
@@ -408,12 +408,12 @@ public class Node {
         for(int i = 0; i < 4; i++){ //check along opposite-diagonal line from 0,3 to 3,0
             if (board[i][3-i] == '-'){
                 prevSpace = '-';
-                count = 0;
+                count = 1;
             }
             else if (board[i][3-i] == 'x'){
                 if (prevSpace == 'x'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.NEGATIVE_INFINITY;
@@ -423,7 +423,7 @@ public class Node {
             else if (board[i][3-i] == 'o'){
                 if (prevSpace == 'o'){
                     count++;
-                } else count = 0; //reset counter if changed
+                } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
                     this.heuristic = Double.POSITIVE_INFINITY;
