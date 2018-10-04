@@ -10,11 +10,11 @@ package cs4750hw4;
  * @author Joey Crowe, Danny Jakle, Kelly Galakatos
  */
 public class Node {
-    private char[][] board;
-    private int depth;
-    private Node miniMaxChild;
-    private double heuristic;
-    private double adjustment;
+    public char[][] board;
+    public int depth;
+    public Node miniMaxChild;
+    public double heuristic;
+    public double adjustment;
     
     
     //idea: implement heuristic as a double for comparison purposes. First, evaluate heuristic(int function) and set heuristic to float. 
