@@ -17,6 +17,11 @@ public class CS4750HW4 {
     public static void main(String[] args) {
         // TODO code application logic here
         //comment
+        
+        final long startTime = System.currentTimeMillis();
+        
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Total execution time: " + (endTime - startTime) );
     }
     
 }
