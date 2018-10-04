@@ -7,7 +7,7 @@ package cs4750hw4;
 
 /**
  *
- * @author Joey Crowe, Danny Jakle
+ * @author Joey Crowe, Danny Jakle, Kelly Galakatos
  */
 public class Node {
     private char[][] board;
