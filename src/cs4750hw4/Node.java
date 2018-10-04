@@ -14,6 +14,7 @@ public class Node {
     private int depth;
     private Node miniMaxChild;
     private double heuristic;
+    private double adjustment;
     
     
     //idea: implement heuristic as a double for comparison purposes. First, evaluate heuristic(int function) and set heuristic to float. 
@@ -34,8 +35,21 @@ public class Node {
             }
         }
         this.board[x][y] = marker;
+        this.adjustment=getAdjustment(x,y);
     }
     
+    private double getAdjustment(int x, int y){
+        double temp;
+        if (x == 0 || x == 5 || y == 0 || y ==5){
+            temp = 0.0;
+        } else if (x == 1 || x==4 || y  == 1 || y == 4){
+            temp = 0.3;
+        } else {
+            temp = .6;
+        }
+        temp += Math.random()/10;
+        return temp;
+    }
     
     //algorithm expands  all available moves, updates heuristic based off of max or min, and returns itself to its parent 
     //uses a DFS which uses constant space. 
@@ -46,7 +60,18 @@ public class Node {
             return this;
         }
         if (depth == 0){
-            this.setHeuristic();
+            char piecePlaying;
+            if (isMaxPlayer){
+                piecePlaying = 'x';
+            } else {
+                piecePlaying = 'o';
+            }
+            int x = heuristic(piecePlaying, this.board);
+            this.heuristic = x + this.adjustment;
+            if (!isMaxPlayer){
+                this.heuristic*=-1;
+            }
+            
             return this;
         }
         if (isMaxPlayer){
