@@ -87,6 +87,15 @@ public class Node {
         return (x == '-');//char for blank spaces
     }
     
+    public static void printBoard(char[][] board) {
+        for(int i = 0; i < 6; i++) {
+            for(int j = 0; j < 6; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+        System.out.println("");
+        }      
+    }    
+    
     //evaluate whether this is a "solution", should also set the heuristic of this node to a really large negative or positve number
     // based upon whether player one or player two is moving
     // obtained four in a row portion from http://www.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe.html, inferred the rest from this
