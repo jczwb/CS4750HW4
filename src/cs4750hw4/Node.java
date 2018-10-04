@@ -10,6 +10,7 @@ package cs4750hw4;
  * @author Joey Crowe, Danny Jakle, Kelly Galakatos
  */
 public class Node {
+       
     private char[][] board;
     private int depth;
     private Node miniMaxChild;
