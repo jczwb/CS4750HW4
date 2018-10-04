@@ -442,10 +442,10 @@ public class Node {
     public static int heuristic(char whoseTurn, char[][] board) {
         char opponent;
         
-        if(whoseTurn == 'X') {
-            opponent = 'O';
+        if(whoseTurn == 'x') {
+            opponent = 'o';
         } else {
-            opponent = 'X';
+            opponent = 'x';
         }
         
         int heuristic;
