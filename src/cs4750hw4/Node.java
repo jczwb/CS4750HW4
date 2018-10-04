@@ -17,7 +17,7 @@ public class Node {
     private double heuristic;
     private double adjustment;
     
-    
+    static int nodesGenerated = 0;
     //idea: implement heuristic as a double for comparison purposes. First, evaluate heuristic(int function) and set heuristic to float. 
     //Then divide board into strata based of of distance to center. IE center = starts at .7, middle ring = .4 outer ring = .0. 
     //Then add from (0-.3) of rand(). That way the minimax search can just find the min or max based off of one number and ties 
@@ -25,11 +25,12 @@ public class Node {
     
     public Node(){
         board = new char[6][6];//hard coded 6x6, could possible implement for all board sizes, but for simplicity sake
-        
+        nodesGenerated++;
     }
     
     public Node(char board[][], int x, int y, char marker){
         this.board = new char[6][6];
+           nodesGenerated++;
         for (int i =0; i < 6; i++){//copy board
             for (int j=0; j < 6; j++){
                 this.board[i][j] = board[i][j];
@@ -56,6 +57,7 @@ public class Node {
     //uses a DFS which uses constant space. 
     // credit to https://en.wikipedia.org/wiki/Minimax for inspiration for the java algorithm
     public Node getNextNode(int depth, boolean isMaxPlayer){
+           nodesGenerated++;
         Node tempNode;
         if (this.isTerminal()){
             return this;
