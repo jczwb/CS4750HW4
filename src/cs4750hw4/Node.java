@@ -145,7 +145,7 @@ public class Node {
                     } else count = 1; //reset counter if changed
                     prevSpace = 'x';
                     if(count == 4){ //four in a row found
-                        this.heuristic = Double.NEGATIVE_INFINITY;
+                        this.heuristic = Double.POSITIVE_INFINITY;
                         return true;
                     }
                 }
@@ -155,7 +155,7 @@ public class Node {
                     } else count = 1; //reset counter if changed
                     prevSpace = 'o';
                     if(count == 4){ //four in a row found
-                        this.heuristic = Double.POSITIVE_INFINITY;
+                        this.heuristic = Double.NEGATIVE_INFINITY;
                         return true;
                     }
                 }
@@ -176,7 +176,7 @@ public class Node {
                     } else count = 1; //reset counter if changed
                     prevSpace = 'x';
                     if(count == 4){ //four in a row found
-                        this.heuristic = Double.NEGATIVE_INFINITY;
+                        this.heuristic = Double.POSITIVE_INFINITY;
                         return true;
                     }
                 }
@@ -186,7 +186,7 @@ public class Node {
                     } else count = 1; //reset counter if changed
                     prevSpace = 'o';
                     if(count == 4){ //four in a row found
-                        this.heuristic = Double.POSITIVE_INFINITY;
+                        this.heuristic = Double.NEGATIVE_INFINITY;
                         return true;
                     }
                 }
@@ -207,7 +207,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -217,7 +217,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -234,7 +234,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -244,7 +244,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -261,7 +261,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -271,7 +271,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -288,7 +288,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -298,7 +298,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -315,7 +315,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -325,7 +325,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -346,7 +346,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -356,7 +356,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -373,7 +373,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -383,7 +383,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -400,7 +400,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -410,7 +410,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -427,7 +427,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -437,7 +437,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
@@ -454,7 +454,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'x';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.NEGATIVE_INFINITY;
+                    this.heuristic = Double.POSITIVE_INFINITY;
                     return true;
                 }
             }
@@ -464,7 +464,7 @@ public class Node {
                 } else count = 1; //reset counter if changed
                 prevSpace = 'o';
                 if(count == 4){ //four in a row found
-                    this.heuristic = Double.POSITIVE_INFINITY;
+                    this.heuristic = Double.NEGATIVE_INFINITY;
                     return true;
                 }
             }
