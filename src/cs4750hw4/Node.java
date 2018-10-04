@@ -438,8 +438,334 @@ public class Node {
     
     //implement heuristic function, looks like one of the most complicated pieces of code, consider examining comment 
     //above by heuristic for possible implementation for tiebreakers
-    public void setHeuristic(){
+    
+    public static int heuristic(char whoseTurn, char[][] board) {
+        char opponent;
         
+        if(whoseTurn == 'X') {
+            opponent = 'O';
+        } else {
+            opponent = 'X';
+        }
+        
+        int heuristic;
+        
+        
+        heuristic = (5 * tsotiar(whoseTurn, board)) - (10 * tsotiar(opponent, board));
+        
+        heuristic += (3 * osotiar(whoseTurn, board)) - (6 * osotiar(opponent, board));
+        
+        heuristic += otiar(whoseTurn, board) - otiar(opponent, board);
+        
+        
+        return heuristic;
+    } 
+    
+    public static int tsotiar(char player, char[][] board) {
+        
+        int count = 0;
+        
+        for(int i = 0; i < 6; i++) {
+            for(int j = 0; j < 6; j++) {
+                
+                if(board[i][j] == player) {
+                    
+                    //checking if current board[i][j] is the center of a three in a row diagonal, two sides open
+                    if(i > 1 && j > 1 && i < 4 && j < 4) {
+                        if(board[i-1][j-1] == player  && board[i+1][j+1] == player) {
+                            if(board[i-2][j-2] == '-' && board[i+2][j+2] == '-') {
+                                count++;  //one backward-leaning two side open, three in a row 
+                            }
+                        }
+                        if(board[i-1][j+1] == player  && board[i+1][j-1] == player) {
+                            if(board[i-2][j+2] == '-'  && board[i+2][j-2] == '-') {
+                                count++;  //one forward-learning two side open, three in a row
+                            }
+                        }
+                    }
+                    
+                    //checking if current board[i][j] is the center of a three in a row vertical, two sides open
+                    if(i > 1 && i < 4) {
+                        if(board[i-1][j] == player && board[i+1][j] == player) {
+                           if(board[i-2][j] == '-' && board[i+2][j] == '-') {
+                                count++;  //one vertical two side open, three in a row
+                           } 
+                        }
+                    }
+                    
+                    //checking if current board[i][j] is the center of a three in a row horizontal, two sides open
+                    if(j > 1 && j < 4) {
+                        if(board[i][j-1] == player && board[i][j+1] == player) {
+                           if(board[i][j-2] == '-' && board[i][j+2] == '-') {
+                                count++;  //one horizontal two side open, three in a row
+                           } 
+                        }
+                    }
+                     
+                }       
+                    
+            }
+        }
+        
+        return count;
     }
     
+    
+    
+    
+    public static int osotiar(char player, char[][] board) {
+        int count = 0;
+        
+        for(int i = 0; i < 6; i++) {
+            for(int j = 0; j < 6; j++) {
+                
+                if(board[i][j] == player) {
+                    
+                    
+                    //checking if current board[i][j] is the center of a three in a row vertical, one side open
+                    if(i > 0 && i < 5) {
+                        if(board[i-1][j] == player && board[i+1][j] == player) { // if it is three in a row
+
+                            if(i > 1 && i < 4) { //if you are not running into a wall
+                                
+                                if(board[i-2][j] == '-' && board[i+2][j] == '-') { // making sure it is not two sides open
+                                } else if(board[i-2][j] == '-' || board[i+2][j] == '-') {
+                                        count++;
+                                }
+                                
+                            } else if(i == 1 && board[i+2][j] == '-') {  //top end of three in a row is wall
+                                count++;
+                            } else if(i == 4 && board[i-2][j] == '-') {  //bottom end of three in a row is wall
+                                count++;
+                            } 
+   
+                        }
+                    }
+                    
+                    
+                    //checking if current board[i][j] is the center of a three in a row horizontal, one side open
+                    if(j > 0 && j < 5) {
+                        if(board[i][j-1] == player && board[i][j+1] == player) { // if it is three in a row
+
+                            if(j > 1 && j < 4) { //if you are not running into a wall
+                                
+                                if(board[i][j-2] == '-' && board[i][j+2] == '-') { // making sure it is not two sides open
+                                } else if(board[i][j-2] == '-' || board[i][j+2] == '-') {
+                                        count++;
+                                }
+                                
+                            } else if(j == 1 && board[i][j+2] == '-') {  //left end of three in a row is wall
+                                count++;
+                            } else if(j == 4 && board[i][j-2] == '-') {  //right end of three in a row is wall
+                                count++;
+                            } 
+   
+                        }
+                    }
+                    
+                    
+                    //checking if current board[i][j] is the center of a three in a row diagonal, one side open
+                    if(i < 5 && i > 0 && j < 5 && j > 0) {
+
+                        if(board[i-1][j-1] == player && board[i+1][j+1] == player) {  // backward-leaning diagonal
+                        
+                            
+                            if(i == 1 && j != 4 && board[i+2][j+2] == '-') {
+                                count++;
+                            }
+                        
+                            else if(j == 1 && i != 4 && board[i+2][j+2] == '-') {
+                                count++;
+                            }
+                            
+                            else if(i == 4 && j != 1 && board[i-2][j-2] == '-') {
+                                count++;
+                            }
+                            
+                            else if(j == 4 && i != 1 && board[i-2][j-2] == '-') {
+                                count++;
+                            }
+                            
+                            else if(board[i+2][j+2] == '-' && board[i-2][j-2] == '-') {
+                                
+                            } else if(board[i+2][j+2] == '-' || board[i-2][j-2] == '-') {
+                                count++;
+                            }
+                        
+                        }
+                        
+                        
+                        if(board[i-1][j+1] == player && board[i+1][j-1] == player){  // forward-leaning diagonal
+                            
+                            if(i == 1 && j != 1 && board[i+2][j-2] == '-') {
+                                count++;
+                            }
+                        
+                            else if(j == 4 && i != 4 && board[i+2][j-2] == '-') {
+                                count++;
+                            }
+                            
+                            else if(i == 4 && j != 4 && board[i-2][j+2] == '-') {
+                                count++;
+                            }
+                            
+                            else if(j == 1 && i != 1 && board[i-2][j+2] == '-') {
+                                count++;
+                            }
+                            
+                            else if(board[i-2][j+2] == '-' && board[i+2][j-2] == '-') {
+                                
+                            } else if(board[i-2][j+2] == '-' || board[i+2][j-2] == '-') {
+                                count++;
+                            }    
+                            
+                        }
+    
+                    }     
+                    
+                }
+                
+            }   
+        }
+        
+        return count;
+    }
+    
+    
+    
+    
+    public static int otiar(char player, char[][] board) {
+        int count = 0;
+        int diff = 0;  //needs to be divided by two
+        
+        for(int i = 0; i < 6; i++) {
+            for(int j = 0; j < 6; j++) {
+                
+                if(board[i][j] == player) {
+                    
+                   
+                   if(i > 0 && board[i-1][j] == player && i < 5 && board[i+1][j] == '-') {
+                           // top is player && opposite is blank 
+                           if(i > 1) {
+                               if (board[i-2][j] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i-2][j] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   }  //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   if(i > 0 && j > 0 && board[i-1][j-1] == player && i < 5 && j < 5 && board[i+1][j+1] == '-') {
+                           //top left is player && opposite is blank 
+                            if(i > 1 && j > 1) {
+                               if (board[i-2][j-2] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i-2][j-2] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   }  //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   if(i > 0 && j < 5 && board[i-1][j+1] == player && i < 5 && j > 0 && board[i+1][j-1] == '-') {
+                           //top right is player && opposite is blank 
+                            if(i > 1 && j < 4) {
+                               if (board[i-2][j+2] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i-2][j+2] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   }  //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   
+                   if(j > 0 && board[i][j-1] == player && j < 5 && board[i][j+1] == '-') {
+                           //left is player && opposite is blank 
+                           if(j > 1) {
+                               if (board[i][j-2] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i][j-2] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   }  //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   
+                   if(j < 5 && board[i][j+1] == player && j > 0 && board[i][j-1] == '-') {
+                           //right is player && opposite is blank 
+                           if(j < 4) {
+                               if (board[i][j+2] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i][j+2] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   }  //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   if(i < 5 && board[i+1][j] == player && i > 0 && board[i-1][j] == '-') {
+                           // bottom is player && opposite is blank 
+                           if(i < 4) {
+                               if (board[i+2][j] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i+2][j] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   } //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   
+                   if(i < 5 && j > 0 && board[i+1][j-1] == player && i > 0 && j < 5 && board[i-1][j+1] == '-') {
+                           //bottom left is player && opposite is blank 
+                           if(i < 4 && j > 1) {
+                               if (board[i+2][j-2] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i+2][j-2] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                   } //////////////////////////////////////////////////////////////////////////////////
+                   
+                   
+                   if(i < 5 && j < 5 && board[i+1][j+1] == player && i > 0 && j > 0 && board[i-1][j-1] == '-') {
+                           //bottom right is player && opposite is blank 
+                           if(i < 4 && j < 4) {
+                               if (board[i+2][j+2] == '-') {
+                                   diff++;  //eliminating double counts
+                               }
+                               if(board[i+2][j+2] == player) {
+                                   count--;  //eliminating three in a rows
+                               }
+                           }
+                           count++;
+                       
+                   }  //////////////////////////////////////////////////////////////////////////////////
+                        
+                }
+        
+            }
+        }
+        
+        return count - (diff / 2);
+    }
+   
+  
 }
