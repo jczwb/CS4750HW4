@@ -90,7 +90,11 @@ public class Node {
     public static void printBoard(char[][] board) {
         for(int i = 0; i < 6; i++) {
             for(int j = 0; j < 6; j++) {
-                System.out.print(board[i][j] + " ");
+                if(board[i][j] == '-') {
+                    System.out.print(board[i][j] + "  ");
+                } else {
+                    System.out.print(board[i][j] + " ");
+                }
             }
         System.out.println("");
         }      
